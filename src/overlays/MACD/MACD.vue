@@ -98,9 +98,9 @@ export default {
         calc() {
             return {
                 props: {
-                    fast: { def: 12, text: 'Fast Length' },
-                    slow: { def: 26, text: 'Slow Length' },
-                    smooth: { def: 9, text: 'Signal EMA' }
+                    fast: { def: this.fastPeriod, text: 'Fast Length' },
+                    slow: { def: this.slowPeriod, text: 'Slow Length' },
+                    smooth: { def: this.signalPeriod, text: 'Signal EMA' }
                 },
                 update: `
                     let [macd, signal, hist] =
@@ -123,6 +123,15 @@ export default {
     computed: {
         sett() {
             return this.$props.settings
+        },
+        fastPeriod() {
+            return this.sett.fastPeriod || 12
+        },
+        slowPeriod() {
+            return this.sett.slowPeriod || 26
+        },
+        signalPeriod() {
+            return this.sett.signalPeriod || 9
         },
         hist_width() {
             return this.sett.histWidth || 4
